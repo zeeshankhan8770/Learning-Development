@@ -103,33 +103,6 @@ const displayNextProject = async () => {
 };
 
 /* ==========================================================================
-CLIENTS SECTION FLOW
-========================================================================== */
-
-const initializeClientsFlow = () => {
-    const clientsEl = document.getElementById('flow-clients');
-    if (!clientsEl) return;
-    const logoItems = Array.from(clientsEl.querySelectorAll('.client-item')).map(div => ({
-        name: div.getAttribute('data-name'),
-        logoUrl: div.getAttribute('data-logo')
-    }));
-    chatFlow['clients'] = [{
-        speaker: 'A',
-        text: clientsEl.querySelector('.intro')?.innerHTML.trim() || "",
-        type: 'client-logos',
-        logos: logoItems,
-        options: Array.from(clientsEl.querySelectorAll('.options li')).map(li => ({
-            text: li.innerText,
-            action: li.getAttribute('data-action'),
-            link: li.getAttribute('data-link'),
-            styleClass: li.getAttribute('data-class') || ""
-        }))
-    }];
-    const triggers = clientsEl.getAttribute('data-triggers').split(',').map(t => t.trim().toLowerCase());
-    triggers.forEach(t => { keywordMap[t] = 'clients'; });
-};
-
-/* ==========================================================================
 CONTACT SECTION FLOW
 ========================================================================== */
 
@@ -210,7 +183,6 @@ INITIALIZE FLOWS
 ========================================================================== */
 
 function initializeFlows() {
-    initializeClientsFlow();
     initializeContactFlow();
     initializeGenericFlows();
     initializeProjectsFlow();
